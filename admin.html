@@ -4,7 +4,7 @@
   <base href="/Redemo/">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MBS • Admin — Gift Submissions</title>
+  <title>Submissions — Year‑End Appreciation</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
@@ -16,16 +16,13 @@
 </head>
 <body>
   <header class="mast">
-    <div class="mast-inner">
-      <a class="ghost-btn" href="index.html">← BACK</a>
+    <div class="mast-inner only-logo">
       <img class="mark" src="assets/logo.png" alt="MBS mark">
-      <span class="ghost-btn" aria-hidden="true"></span>
     </div>
   </header>
 
   <main class="container card">
     <h2>Submissions</h2>
-    <p class="muted">Local-only demo. Entries are in this browser’s <code>localStorage</code> under key <code>mbs_gifts</code>.</p>
     <div class="controls" style="margin:8px 0 14px">
       <button id="reload" class="btn">Refresh</button>
       <button id="export" class="btn ghost">Export CSV</button>
@@ -39,7 +36,7 @@
     </div>
   </main>
 
-  <footer class="footer"><div class="container"><small>Demo preview — local only</small></div></footer>
+  <footer class="footer"><div class="container"><small>&nbsp;</small></div></footer>
 
   <script>
     function load(){ return JSON.parse(localStorage.getItem('mbs_gifts') || '[]'); }

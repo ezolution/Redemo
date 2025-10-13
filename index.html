@@ -4,18 +4,16 @@
   <base href="/Redemo/">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MBS • Year‑End Appreciation Gifts</title>
+  <title>Year‑End Gift Appreciation</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <meta name="color-scheme" content="light only">
 </head>
 <body>
-  <!-- Top bar styled like MBS -->
-    <header class="mast">
-    <div class="mast-inner">
-      <button class="ghost-btn" aria-label="Menu">≡&nbsp; MENU</button>
+  <!-- Minimal top bar with centered logo only -->
+  <header class="mast">
+    <div class="mast-inner only-logo">
       <img class="mark" src="assets/logo.png" alt="MBS mark">
-      <span class="ghost-btn" aria-hidden="true" style="visibility:hidden;">&nbsp;</span>
     </div>
   </header>
 
@@ -31,7 +29,6 @@
     <!-- Details -->
     <section class="container card">
       <h2>Your Details</h2>
-      <p class="muted">Demo preview: submissions are stored only in your browser (<code>localStorage</code>).</p>
       <form id="giftForm" novalidate>
         <div class="grid2">
           <label class="field">
@@ -68,7 +65,6 @@
 
         <h2 class="section-title">Select Your Gift</h2>
         <div class="catalog">
-          <!-- Gift card -->
           <label class="gift-card" data-value="luxury_pen" tabindex="0">
             <input class="radio" type="radio" name="giftChoice" value="luxury_pen">
             <figure class="gift-media">
@@ -121,7 +117,7 @@
 
       <div id="thankYou" class="thanks" hidden>
         <h3>Thank you!</h3>
-        <p>Your gift choice has been recorded for this demo.</p>
+        <p>Your selection has been recorded.</p>
         <a class="btn ghost" id="submitAnother" href="#">Submit another</a>
       </div>
     </section>
@@ -129,7 +125,7 @@
 
   <footer class="footer">
     <div class="container">
-      <small>© 2025 Marina Bay Sands — Internal Appreciation Event (Demo)</small>
+      <small>© 2025 Marina Bay Sands — Year‑End Appreciation</small>
     </div>
   </footer>
 

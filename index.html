@@ -11,18 +11,21 @@
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand">
-        <img src="assets/logo-placeholder.png" alt="Marina Bay Sands Logo" class="logo">
+        <img src="assets/logo.png" alt="Marina Bay Sands Logo" class="logo">
         <div class="brand-text">
           <h1>Year-End Gift Appreciation</h1>
           <p class="tagline">Because you make this place shine</p>
         </div>
       </div>
+      <a href="admin.html" class="btn-link">Admin view</a>
     </div>
   </header>
+
   <main class="container main">
     <section class="card form-card" aria-labelledby="formTitle">
-      <h2 id="formTitle">Select Your 2025 Year-End Gift</h2>
-      <p class="muted">Please use your corporate email and department. This preview saves data locally in your browser for demo purposes.</p>
+      <h2 id="formTitle">Your Details</h2>
+      <p class="muted">This preview stores submissions in your browser only (localStorage). Safe for demo.</p>
+
       <form id="giftForm" autocomplete="on" novalidate>
         <div class="row">
           <div class="field">
@@ -34,6 +37,7 @@
             <input id="email" name="email" type="email" placeholder="you@mbs.com" required>
           </div>
         </div>
+
         <div class="row">
           <div class="field">
             <label for="department">Department</label>
@@ -51,69 +55,114 @@
               <option>Other</option>
             </select>
           </div>
-          <div class="field">
-            <label for="giftChoice">Gift choice</label>
-            <select id="giftChoice" name="giftChoice" required>
-              <option value="">— Choose your gift —</option>
-              <option value="luxury_pen">MBS Luxury Pen</option>
-              <option value="dining_voucher">Dining Voucher (F&B)</option>
-              <option value="spa_voucher">Spa Treatment Voucher</option>
-              <option value="staycation">One-night Staycation</option>
-            </select>
-          </div>
         </div>
+
+        <h2 style="margin-top:10px">Select Your Gift</h2>
+        <div class="catalogue" id="catalogue">
+          <label class="catalog-card" data-value="luxury_pen">
+            <input class="radio-hidden" type="radio" name="giftChoice" value="luxury_pen">
+            <img src="assets/gift_pen.jpg" alt="Luxury Pen">
+            <div class="catalog-info"><h4>Luxury Pen</h4><p>Signature edition</p></div>
+          </label>
+
+          <label class="catalog-card" data-value="dining_voucher">
+            <input class="radio-hidden" type="radio" name="giftChoice" value="dining_voucher">
+            <img src="assets/gift_dining.jpg" alt="Dining Voucher">
+            <div class="catalog-info"><h4>Dining Voucher</h4><p>Culinary experience</p></div>
+          </label>
+
+          <label class="catalog-card" data-value="spa_voucher">
+            <input class="radio-hidden" type="radio" name="giftChoice" value="spa_voucher">
+            <img src="assets/gift_spa.jpg" alt="Spa Voucher">
+            <div class="catalog-info"><h4>Spa Voucher</h4><p>Relax & rejuvenate</p></div>
+          </label>
+
+          <label class="catalog-card" data-value="staycation">
+            <input class="radio-hidden" type="radio" name="giftChoice" value="staycation">
+            <img src="assets/gift_staycation.jpg" alt="Staycation Night">
+            <div class="catalog-info"><h4>Staycation Night</h4><p>Suite comfort</p></div>
+          </label>
+        </div>
+
         <div class="row">
           <div class="field fullwidth">
             <label for="remarks">Remarks (optional)</label>
             <textarea id="remarks" name="remarks" placeholder="Dietary notes or special requests"></textarea>
           </div>
         </div>
+
         <div class="actions">
           <button id="submitBtn" type="submit" class="btn-primary">Submit selection</button>
-          <a href="admin.html" class="btn-link">Admin view</a>
         </div>
       </form>
+
       <div id="thankYou" class="thankyou" hidden>
         <h3>Thank you!</h3>
-        <p>We have recorded your gift choice. You will receive an internal confirmation shortly.</p>
+        <p>We have recorded your gift choice. A confirmation will be sent internally.</p>
         <button id="submitAnother" class="btn-ghost">Submit another</button>
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
     <div class="container">
       <small>© 2025 Marina Bay Sands — Internal Appreciation Event</small>
     </div>
   </footer>
+
   <script>
     (function(){
       const form = document.getElementById('giftForm');
       const thankYou = document.getElementById('thankYou');
       const submitAnother = document.getElementById('submitAnother');
+      const cards = Array.from(document.querySelectorAll('.catalog-card'));
+      const radios = Array.from(document.querySelectorAll('input[name="giftChoice"]'));
+
+      function selectCard(value){
+        cards.forEach(c => c.classList.toggle('selected', c.dataset.value === value));
+        const radio = radios.find(r => r.value === value);
+        if(radio){ radio.checked = true; }
+      }
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => selectCard(card.dataset.value));
+        card.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault(); selectCard(card.dataset.value);
+          }
+        });
+        card.tabIndex = 0; card.setAttribute('role','radio'); card.setAttribute('aria-checked','false');
+      });
+
       function saveEntry(entry){
         const key = 'mbs_gifts';
         const data = JSON.parse(localStorage.getItem(key) || '[]');
         data.push(entry);
         localStorage.setItem(key, JSON.stringify(data));
       }
+
       form.addEventListener('submit', function(e){
         e.preventDefault();
-        const entry = {
-          ts: new Date().toISOString(),
-          fullName: document.getElementById('fullName').value.trim(),
-          email: document.getElementById('email').value.trim(),
-          department: document.getElementById('department').value,
-          giftChoice: document.getElementById('giftChoice').value,
-          remarks: document.getElementById('remarks').value.trim(),
-        };
+        const fullName = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const department = document.getElementById('department').value;
+        const giftChoice = (radios.find(r => r.checked) || {}).value || '';
+        const remarks = document.getElementById('remarks').value.trim();
+
+        if(!fullName || !email || !department || !giftChoice){
+          alert('Please complete all required fields and select a gift.');
+          return;
+        }
+
+        const entry = { ts:new Date().toISOString(), fullName, email, department, giftChoice, remarks, ua:navigator.userAgent };
         saveEntry(entry);
-        form.hidden = true;
-        thankYou.hidden = false;
+
+        form.hidden = true; thankYou.hidden = false;
       });
+
       submitAnother && submitAnother.addEventListener('click', function(){
-        form.reset();
-        thankYou.hidden = true;
-        form.hidden = false;
+        form.reset(); cards.forEach(c => c.classList.remove('selected'));
+        thankYou.hidden = true; form.hidden = false;
       });
     })();
   </script>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Marina Bay Sands — Year-End Gift Appreciation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="assets/logo-placeholder.png" alt="Marina Bay Sands Logo" class="logo">
+        <div class="brand-text">
+          <h1>Year-End Gift Appreciation</h1>
+          <p class="tagline">Because you make this place shine</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="container main">
+    <section class="card form-card" aria-labelledby="formTitle">
+      <h2 id="formTitle">Select Your 2025 Year-End Gift</h2>
+      <p class="muted">Please use your corporate email and department. This preview saves data locally in your browser for demo purposes.</p>
+      <form id="giftForm" autocomplete="on" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="fullName">Full name</label>
+            <input id="fullName" name="fullName" type="text" placeholder="e.g. Tan Mei Ling" required>
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" placeholder="you@mbs.com" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="department">Department</label>
+            <select id="department" name="department" required>
+              <option value="">— Select department —</option>
+              <option>Operations</option>
+              <option>Food & Beverage</option>
+              <option>Rooms</option>
+              <option>Sales</option>
+              <option>Human Resources</option>
+              <option>Marketing</option>
+              <option>IT</option>
+              <option>Cyber Security</option>
+              <option>Facilities</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="giftChoice">Gift choice</label>
+            <select id="giftChoice" name="giftChoice" required>
+              <option value="">— Choose your gift —</option>
+              <option value="luxury_pen">MBS Luxury Pen</option>
+              <option value="dining_voucher">Dining Voucher (F&B)</option>
+              <option value="spa_voucher">Spa Treatment Voucher</option>
+              <option value="staycation">One-night Staycation</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field fullwidth">
+            <label for="remarks">Remarks (optional)</label>
+            <textarea id="remarks" name="remarks" placeholder="Dietary notes or special requests"></textarea>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="submitBtn" type="submit" class="btn-primary">Submit selection</button>
+          <a href="admin.html" class="btn-link">Admin view</a>
+        </div>
+      </form>
+      <div id="thankYou" class="thankyou" hidden>
+        <h3>Thank you!</h3>
+        <p>We have recorded your gift choice. You will receive an internal confirmation shortly.</p>
+        <button id="submitAnother" class="btn-ghost">Submit another</button>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <small>© 2025 Marina Bay Sands — Internal Appreciation Event</small>
+    </div>
+  </footer>
+  <script>
+    (function(){
+      const form = document.getElementById('giftForm');
+      const thankYou = document.getElementById('thankYou');
+      const submitAnother = document.getElementById('submitAnother');
+      function saveEntry(entry){
+        const key = 'mbs_gifts';
+        const data = JSON.parse(localStorage.getItem(key) || '[]');
+        data.push(entry);
+        localStorage.setItem(key, JSON.stringify(data));
+      }
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const entry = {
+          ts: new Date().toISOString(),
+          fullName: document.getElementById('fullName').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          department: document.getElementById('department').value,
+          giftChoice: document.getElementById('giftChoice').value,
+          remarks: document.getElementById('remarks').value.trim(),
+        };
+        saveEntry(entry);
+        form.hidden = true;
+        thankYou.hidden = false;
+      });
+      submitAnother && submitAnother.addEventListener('click', function(){
+        form.reset();
+        thankYou.hidden = true;
+        form.hidden = false;
+      });
+    })();
+  </script>
+</body>
+</html>

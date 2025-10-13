@@ -4,44 +4,48 @@
   <base href="/Redemo/">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Marina Bay Sands — Year-End Gift Appreciation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>MBS • Year‑End Appreciation Gifts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <meta name="color-scheme" content="light only">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <img src="assets/logo.png" alt="Marina Bay Sands Logo" class="logo">
-        <div class="brand-text">
-          <h1>Year-End Gift Appreciation</h1>
-          <p class="tagline">Because you make this place shine</p>
-        </div>
-      </div>
-      <a href="admin.html" class="btn-link">Admin view</a>
+  <!-- Top bar styled like MBS -->
+  <header class="mast">
+    <div class="mast-inner">
+      <button class="ghost-btn" aria-label="Menu">≡&nbsp; MENU</button>
+      <img class="mark" src="assets/logo.png" alt="MBS mark">
+      <a class="ghost-btn" href="admin.html">ADMIN</a>
     </div>
   </header>
 
-  <main class="container main">
-    <section class="card form-card" aria-labelledby="formTitle">
-      <h2 id="formTitle">Your Details</h2>
-      <p class="muted">This preview stores submissions in your browser only (localStorage). Safe for demo.</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-copy">
+      <h1 class="hero-title">A Moment of Appreciation</h1>
+      <p class="hero-sub">Choose a gift curated for colleagues with taste, curiosity and an appetite for adventure.</p>
+    </div>
+  </section>
 
-      <form id="giftForm" autocomplete="on" novalidate>
-        <div class="row">
-          <div class="field">
-            <label for="fullName">Full name</label>
+  <main>
+    <!-- Details -->
+    <section class="container card">
+      <h2>Your Details</h2>
+      <p class="muted">Demo preview: submissions are stored only in your browser (<code>localStorage</code>).</p>
+      <form id="giftForm" novalidate>
+        <div class="grid2">
+          <label class="field">
+            <span>Full name</span>
             <input id="fullName" name="fullName" type="text" placeholder="e.g. Tan Mei Ling" required>
-          </div>
-          <div class="field">
-            <label for="email">Email address</label>
+          </label>
+          <label class="field">
+            <span>Email address</span>
             <input id="email" name="email" type="email" placeholder="you@mbs.com" required>
-          </div>
+          </label>
         </div>
-
-        <div class="row">
-          <div class="field">
-            <label for="department">Department</label>
+        <div class="grid2">
+          <label class="field">
+            <span>Department</span>
             <select id="department" name="department" required>
               <option value="">— Select department —</option>
               <option>Operations</option>
@@ -55,115 +59,128 @@
               <option>Facilities</option>
               <option>Other</option>
             </select>
-          </div>
-        </div>
-
-        <h2 style="margin-top:10px">Select Your Gift</h2>
-        <div class="catalogue" id="catalogue">
-          <label class="catalog-card" data-value="luxury_pen">
-            <input class="radio-hidden" type="radio" name="giftChoice" value="luxury_pen">
-            <img src="assets/gift_pen.jpg" alt="Luxury Pen">
-            <div class="catalog-info"><h4>Luxury Pen</h4><p>Signature edition</p></div>
           </label>
-
-          <label class="catalog-card" data-value="dining_voucher">
-            <input class="radio-hidden" type="radio" name="giftChoice" value="dining_voucher">
-            <img src="assets/gift_dining.jpg" alt="Dining Voucher">
-            <div class="catalog-info"><h4>Dining Voucher</h4><p>Culinary experience</p></div>
-          </label>
-
-          <label class="catalog-card" data-value="spa_voucher">
-            <input class="radio-hidden" type="radio" name="giftChoice" value="spa_voucher">
-            <img src="assets/gift_spa.jpg" alt="Spa Voucher">
-            <div class="catalog-info"><h4>Spa Voucher</h4><p>Relax & rejuvenate</p></div>
-          </label>
-
-          <label class="catalog-card" data-value="staycation">
-            <input class="radio-hidden" type="radio" name="giftChoice" value="staycation">
-            <img src="assets/gift_staycation.jpg" alt="Staycation Night">
-            <div class="catalog-info"><h4>Staycation Night</h4><p>Suite comfort</p></div>
+          <label class="field">
+            <span>Remarks (optional)</span>
+            <input id="remarks" name="remarks" type="text" placeholder="Dietary notes, etc.">
           </label>
         </div>
 
-        <div class="row">
-          <div class="field fullwidth">
-            <label for="remarks">Remarks (optional)</label>
-            <textarea id="remarks" name="remarks" placeholder="Dietary notes or special requests"></textarea>
-          </div>
+        <h2 class="section-title">Select Your Gift</h2>
+        <div class="catalog">
+          <!-- Gift card -->
+          <label class="gift-card" data-value="luxury_pen" tabindex="0">
+            <input class="radio" type="radio" name="giftChoice" value="luxury_pen">
+            <figure class="gift-media">
+              <img src="assets/gift_pen.jpg" alt="Luxury Pen">
+            </figure>
+            <div class="gift-info">
+              <h3>Luxury Pen</h3>
+              <p>Signature edition</p>
+            </div>
+          </label>
+
+          <label class="gift-card" data-value="dining_voucher" tabindex="0">
+            <input class="radio" type="radio" name="giftChoice" value="dining_voucher">
+            <figure class="gift-media">
+              <img src="assets/gift_dining.jpg" alt="Dining Voucher">
+            </figure>
+            <div class="gift-info">
+              <h3>Dining Voucher</h3>
+              <p>Culinary experience</p>
+            </div>
+          </label>
+
+          <label class="gift-card" data-value="spa_voucher" tabindex="0">
+            <input class="radio" type="radio" name="giftChoice" value="spa_voucher">
+            <figure class="gift-media">
+              <img src="assets/gift_spa.jpg" alt="Spa Voucher">
+            </figure>
+            <div class="gift-info">
+              <h3>Spa Voucher</h3>
+              <p>Relax &amp; rejuvenate</p>
+            </div>
+          </label>
+
+          <label class="gift-card" data-value="staycation" tabindex="0">
+            <input class="radio" type="radio" name="giftChoice" value="staycation">
+            <figure class="gift-media">
+              <img src="assets/gift_staycation.jpg" alt="Staycation Night">
+            </figure>
+            <div class="gift-info">
+              <h3>Staycation Night</h3>
+              <p>Suite comfort</p>
+            </div>
+          </label>
         </div>
 
         <div class="actions">
-          <button id="submitBtn" type="submit" class="btn-primary">Submit selection</button>
+          <button class="btn" type="submit">Submit selection</button>
         </div>
       </form>
 
-      <div id="thankYou" class="thankyou" hidden>
+      <div id="thankYou" class="thanks" hidden>
         <h3>Thank you!</h3>
-        <p>We have recorded your gift choice. A confirmation will be sent internally.</p>
-        <button id="submitAnother" class="btn-ghost">Submit another</button>
+        <p>Your gift choice has been recorded for this demo.</p>
+        <a class="btn ghost" id="submitAnother" href="#">Submit another</a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
-      <small>© 2025 Marina Bay Sands — Internal Appreciation Event</small>
+      <small>© 2025 Marina Bay Sands — Internal Appreciation Event (Demo)</small>
     </div>
   </footer>
 
   <script>
     (function(){
       const form = document.getElementById('giftForm');
-      const thankYou = document.getElementById('thankYou');
-      const submitAnother = document.getElementById('submitAnother');
-      const cards = Array.from(document.querySelectorAll('.catalog-card'));
+      const ty = document.getElementById('thankYou');
+      const again = document.getElementById('submitAnother');
+      const cards = Array.from(document.querySelectorAll('.gift-card'));
       const radios = Array.from(document.querySelectorAll('input[name="giftChoice"]'));
 
-      function selectCard(value){
-        cards.forEach(c => c.classList.toggle('selected', c.dataset.value === value));
-        const radio = radios.find(r => r.value === value);
-        if(radio){ radio.checked = true; }
+      function choose(v){
+        cards.forEach(c => c.classList.toggle('selected', c.dataset.value === v));
+        const r = radios.find(x => x.value === v);
+        if (r) r.checked = true;
       }
-
       cards.forEach(card => {
-        card.addEventListener('click', () => selectCard(card.dataset.value));
+        card.addEventListener('click', () => choose(card.dataset.value));
         card.addEventListener('keydown', (e) => {
-          if(e.key === 'Enter' || e.key === ' '){
-            e.preventDefault(); selectCard(card.dataset.value);
-          }
+          if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); choose(card.dataset.value); }
         });
-        card.tabIndex = 0; card.setAttribute('role','radio'); card.setAttribute('aria-checked','false');
       });
 
-      function saveEntry(entry){
-        const key = 'mbs_gifts';
-        const data = JSON.parse(localStorage.getItem(key) || '[]');
-        data.push(entry);
-        localStorage.setItem(key, JSON.stringify(data));
+      function save(entry){
+        const k = 'mbs_gifts';
+        const arr = JSON.parse(localStorage.getItem(k) || '[]');
+        arr.push(entry);
+        localStorage.setItem(k, JSON.stringify(arr));
       }
 
-      form.addEventListener('submit', function(e){
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
         const fullName = document.getElementById('fullName').value.trim();
         const email = document.getElementById('email').value.trim();
         const department = document.getElementById('department').value;
-        const giftChoice = (radios.find(r => r.checked) || {}).value || '';
         const remarks = document.getElementById('remarks').value.trim();
+        const giftChoice = (radios.find(r => r.checked) || {}).value || '';
 
         if(!fullName || !email || !department || !giftChoice){
           alert('Please complete all required fields and select a gift.');
           return;
         }
-
-        const entry = { ts:new Date().toISOString(), fullName, email, department, giftChoice, remarks, ua:navigator.userAgent };
-        saveEntry(entry);
-
-        form.hidden = true; thankYou.hidden = false;
+        save({ts:new Date().toISOString(), fullName, email, department, giftChoice, remarks});
+        form.hidden = true; ty.hidden = false;
       });
 
-      submitAnother && submitAnother.addEventListener('click', function(){
-        form.reset(); cards.forEach(c => c.classList.remove('selected'));
-        thankYou.hidden = true; form.hidden = false;
+      again.addEventListener('click', (e)=>{
+        e.preventDefault();
+        form.reset();
+        cards.forEach(c => c.classList.remove('selected'));
+        ty.hidden = true; form.hidden = false;
       });
     })();
   </script>

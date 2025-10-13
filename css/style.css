@@ -1,4 +1,4 @@
-/* MBS‑inspired theme */
+/* MBS‑inspired theme (logo‑only header, no menu/admin) */
 :root{
   --gold:#c1a65b;
   --ink:#111;
@@ -26,11 +26,7 @@ body{
   max-width:1100px;margin:0 auto;
   padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
 }
-.ghost-btn{
-  background:transparent;border:1px solid rgba(0,0,0,.15);
-  padding:8px 12px;border-radius:999px;font-size:14px;letter-spacing:.06em;
-  text-decoration:none;color:var(--ink);cursor:pointer
-}
+.mast-inner.only-logo{justify-content:center}
 .mark{height:28px;display:block;opacity:.92}
 
 /* Hero */
